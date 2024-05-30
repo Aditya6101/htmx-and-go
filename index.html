@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HTMLX and GO</title>
+        <script
+            src="https://unpkg.com/htmx.org@1.9.12"
+            integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <h1>Todos</h1>
+
+        <ul id="todo-list">
+            {{range .Todos}} {{block "todo-list-element" .}}
+            <li>{{.Title}}</li>
+            {{end}} {{end}}
+        </ul>
+
+        <form hx-swap="beforeend" hx-post="/add-todo" hx-target="#todo-list">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" />
+            <button type="submit">Add</button>
+        </form>
+    </body>
+</html>
